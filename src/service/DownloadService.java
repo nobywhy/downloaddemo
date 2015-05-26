@@ -22,6 +22,8 @@ public class DownloadService extends Service {
 	private static String TAG = DownloadService.class.getSimpleName();
 	public static final String ACTION_START="ACTION_START";
 	public static final String ACTION_PASUE="ACTION_PASUE";
+	public static final String ACTION_UPDATE = "ACTION_UPDATE";
+	public static final String FINISHED = "FINISHED";
 	
 	private final int MSG_INIT = 1;
 	
@@ -34,7 +36,8 @@ public class DownloadService extends Service {
 				FileInfo fileInfo = (FileInfo) msg.obj;
 				Log.d(TAG, "length="+fileInfo.getLength());
 				
-				
+				DownloadTask task = new DownloadTask(DownloadService.this,fileInfo);
+				task.download();
 				
 				
 			}
